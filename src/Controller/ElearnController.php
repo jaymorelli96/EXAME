@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\CoursesRepository;
+use App\Repository\EnrollsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -52,4 +53,65 @@ class ElearnController extends AbstractController
             'courses' => $courses
         ]);
     }
+
+
+    /**
+     * @Route("/messagelogout", name="message_logout")
+     * @param CoursesRepository $coursesRepository
+     * @return Response
+     */
+    public function message_logout(CoursesRepository $coursesRepository): Response
+    {
+        return $this->render('message/message.html.twig', [
+            'controller_name' => 'courses',
+            'message' => 'Bye bye!'
+        ]);
+    }
+
+
+    /**
+     * @Route("enroll/{id?}", name="enroll")
+     * @param $id
+     * @param Request $request
+     * @param CoursesRepository $coursesRepository
+     * @param EnrollsRepository $enrollsRepository
+     * @return Response
+     */
+    function enroll($id, Request $request,CoursesRepository $coursesRepository, EnrollsRepository $enrollsRepository)
+    {
+        $user = $this->getUser();
+        if ($user == NULL) {
+            return $this->redirect($this->generateUrl('app_login'));
+        }
+        $this->addFlash('success', 'Success!!');
+        $course = $coursesRepository->findBy(
+            ['id' => $id]
+        );
+        $enrollsRepository->insertEnroll($user,$course[0]);
+        return $this->redirect($this->generateUrl('message_success'));
+    }
+
+
+    /**
+     * @Route("myCourses", name="mycourses")
+     * @param Request $request
+     * @param CoursesRepository $coursesRepository
+     * @param EnrollsRepository $enrollsRepository
+     * @return Response
+     */
+    function myCourses(Request $request,CoursesRepository $coursesRepository, EnrollsRepository $enrollsRepository)
+    {
+        $user = $this->getUser();
+
+        $enroll = $enrollsRepository->findBy(
+            ['user' => $user]
+        );
+        return $this->render('elearn/mycourses.html.twig', [
+            'enrolls' => $enroll
+        ]);
+    }
+
+
+
+
 }

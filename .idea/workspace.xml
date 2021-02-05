@@ -2,15 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4f07003-4a1f-431a-9ee7-3b8cc4d1ea78" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Controller/MessageController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/message/message.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/mouseover.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/elearn/mycourses.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/demo/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/RegistrationFormType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/RegistrationFormType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Security/AppCustomAuthenticator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Security/AppCustomAuthenticator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registration/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/register.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/styles/courses.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/styles/courses.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ElearnController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ElearnController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/MessageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MessageController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/CoursesRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/CoursesRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/EnrollsRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/EnrollsRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/elearn/courses.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/elearn/courses.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/message/message.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/message/message.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +166,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1612533301627</updated>
-      <workItem from="1612533302951" duration="7044000" />
+      <workItem from="1612533302951" duration="13745000" />
     </task>
     <servers />
   </component>

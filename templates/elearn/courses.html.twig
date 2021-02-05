@@ -11,10 +11,19 @@
 {% block nav %}
     <li><a href="{{ path('elearn') }}">home</a></li>
     <li class="active"><a href="{{ path('courses') }}">courses</a></li>
-    <li><a href="myCourses.html">My courses</a></li>
+    <li><a href="{{ path('mycourses') }}">My courses</a></li>
+
+    {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+        <li><a href="{{ path('app_logout') }}">Logout</a></li>
+    {% else %}
+        <li><a href="{{ path('app_login') }}">Login</a></li>
+    {% endif %}
+
+    {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+    <li>{{ app.user.name }}</li>
+    {% else %}
     <li><a href="{{ path('app_register') }}">Register</a></li>
-    <li><a href="{{ path('app_login') }}">Login</a></li>
-    <li>WELCOME</li>
+    {% endif %}
 {% endblock %}
 
 {% block body %}
@@ -34,8 +43,9 @@
                 </div>
 
                 {% for course in courses %}
+                    {% set i = loop.index0 %}
                 <!-- Course -->
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 cBox ">
                     <div class="course">
                         <div class="course_image"><img src="{{ asset('images/' ~course.cImage) }}" alt=""></div>
                         <div class="course_body">
@@ -43,18 +53,21 @@
                                 <div class="course_tag"><a href="#">Featured</a></div>
                                 <div class="course_price ml-auto">Price: <span>${{ course.cPrice }}</span></div>
                             </div>
-                            <div class="course_title"><h3><a href="#">{{ course.cName }}</a></h3></div>
+                            <br><div class="text-center"><div class="button enroll-btn hidden"><a href="{{ path('enroll', {'id': course.cId}) }}">Enroll</a></div></div>
+                            <div class="course_title"><h3><a class="cTitle" href="#">{{ course.cName }}</a></h3></div>
                             <div class="course_text">{{ course.cDescription }}</div>
                             <div class="course_footer d-flex align-items-center justify-content-start">
                                 <div class="course_author_image"><img src="{{ asset('images/' ~course.tImage) }}" ></div>
                                 <div class="course_author_name">By <a href="#">{{ course.tName }}</a></div>
                                 <div class="course_sales ml-auto"><span>{{ course.cSales }}</span> Sales</div>
                             </div>
-                            <br><div class="text-center"><div class="button"><a href="#">Enroll</a></div></div>
+
                         </div>
                     </div>
                 </div>
+
                 {% endfor %}
+
 
             </div>
 
@@ -62,13 +75,38 @@
         </div>
     </div>
 
+    <script>
+        const box = document.querySelectorAll('.cBox');
+        const btns = document.querySelectorAll('.enroll-btn');
+        const titles = document.querySelectorAll('.course_title');
+        const descriptions = document.querySelectorAll('.course_text');
+
+        for (let i = 0; i < box.length; i++) {
+            box[i].addEventListener('mouseover', () => {
+                btns[i].classList.remove('hidden');
+                titles[i].classList.add('hidden');
+                descriptions[i].classList.add('hidden');
+            });
+
+            box[i].addEventListener('mouseout', () => {
+                btns[i].classList.add('hidden');
+                titles[i].classList.remove('hidden');
+                descriptions[i].classList.remove('hidden');
+            });
+        }
+
+
+    </script>
+
 {% block js %}
+
     <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ asset('styles/bootstrap4/popper.js') }}"></script>
     <script src="{{ asset('styles/bootstrap4/bootstrap.min.js') }}"></script>
     <script src="{{ asset('plugins/easing/easing.js') }}"></script>
     <script src="{{ asset('plugins/parallax-js-master/parallax.min.js') }}"></script>
     <script src="{{ asset('js/courses.js') }}"></script>
+    <script src="{{ asset('js/mouseover.js') }}"></script>
 {% endblock %}
 {% endblock %}
 

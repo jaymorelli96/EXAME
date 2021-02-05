@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Enrolls;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,6 +20,19 @@ class EnrollsRepository extends ServiceEntityRepository
         parent::__construct($registry, Enrolls::class);
     }
 
+    function insertEnroll($user, $course) {
+        $entityManager = $this->getEntityManager();
+        $enroll = new Enrolls();
+        $enroll->setUser($user);
+        $enroll->setEnrollDate(new \DateTime());
+        $enroll->setCourse($course);
+        try {
+            $entityManager->persist($enroll);
+            $entityManager->flush();
+        } catch (ORMException $e) {
+        }
+
+    }
     // /**
     //  * @return Enrolls[] Returns an array of Enrolls objects
     //  */

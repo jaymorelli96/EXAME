@@ -143,6 +143,13 @@ h6::selection
 {
 	color: #db5246;
 }
+
+
+.hidden {
+	display:none !important;
+}
+
+
 section
 {
 	display: block;

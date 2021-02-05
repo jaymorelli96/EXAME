@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Courses{% endblock %}
+
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('styles/bootstrap4/bootstrap.min.css') }}">
+    <link href="{{ asset('plugins/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('plugins/video-js/video-js.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('styles/news.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('styles/news_responsive.css') }}">
+{% endblock %}
+{% block nav %}
+    <li><a href="{{ path('elearn') }}">home</a></li>
+    <li ><a href="{{ path('courses') }}">courses</a></li>
+    <li class="active"><a href="{{ path('mycourses') }}">My courses</a></li>
+
+    {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+        <li><a href="{{ path('app_logout') }}">Logout</a></li>
+    {% else %}
+        <li><a href="{{ path('app_login') }}">Login</a></li>
+    {% endif %}
+
+    {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+        <li>{{ app.user.name }}</li>
+    {% else %}
+        <li><a href="{{ path('app_register') }}">Register</a></li>
+    {% endif %}
+{% endblock %}
+{% block body %}
+
+    <div class="home">
+        <!-- Background image artist https://unsplash.com/@thepootphotographer -->
+        <div class="home_background parallax_background parallax-window" data-parallax="scroll" data-image-src="{{ asset('images/news.jpg') }}" data-speed="0.8"></div>
+        <div class="home_container">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="home_content text-center">
+                            <div class="home_title">My Courses</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- News -->
+
+    <div class="news">
+        <div class="container">
+            <div class="row">
+
+                <!-- News Posts -->
+                <div class="col-lg-8">
+                    <div class="news_posts">
+
+
+                        {% for enroll in enrolls %}
+                            <!-- News Post -->
+                            <div class="news_post">
+                                <div class="news_post_body">
+                                    <div class="news_post_date"><a href="#">{{ enroll.enrollDate |date('Y-m-d H:m:s') }}</a></div>
+                                    <div class="news_post_title"><a href="#">{{ enroll.course.name }}</a></div>
+                                    <div class="news_post_meta d-flex flex-row align-items-start justify-content-start">
+                                        <div class="news_post_author">By <a href="#">{{ enroll.course.teacher.name }}</a></div>
+                                    </div>
+                                    <div class="news_post_text">
+                                        <p>{{ enroll.course.description }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <hr>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+    {% block javascripts %}
+        <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+        <script src="{{ asset('styles/bootstrap4/popper.js') }}"></script>
+        <script src="{{ asset('styles/bootstrap4/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('plugins/easing/easing.js') }}"></script>
+        <script src="{{ asset('plugins/parallax-js-master/parallax.min.js') }}"></script>
+        <script src="{{ asset('js/news.js') }}"></script>
+    {% endblock %}
+
+{% endblock %}
