@@ -1,21 +1,103 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}REGISTER{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('styles/bootstrap4/bootstrap.min.css') }}">
+    <link href="{{ asset('plugins/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('plugins/video-js/video-js.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('styles/contact.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('styles/contact_responsive.css') }}">
+{% endblock %}
+{% block nav %}
+    <li><a href="{{ path('elearn') }}">home</a></li>
+    <li ><a href="{{ path('courses') }}">courses</a></li>
+    <li><a href="myCourses.html">My courses</a></li>
+    <li class="active"><a href="{{ path('app_register') }}">Register</a></li>
+    <li ><a href="{{ path('app_login') }}">Login</a></li>
+    <li>WELCOME</li>
+{% endblock %}
 
 {% block body %}
     {% for flashError in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
 
-    <h1>Register</h1>
+    <div class="home">
+        <!-- Background image artist https://unsplash.com/@thepootphotographer -->
+        <div class="home_background parallax_background parallax-window" data-parallax="scroll" data-image-src="{{ asset('images/contact.jpg') }}" data-speed="0.8"></div>
+        <div class="home_container">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="home_content text-center">
+                            <div class="home_title">Register</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+
+    <div class="contact">
+        <div class="container-fluid">
+            <div class="row row-xl-eq-height">
+                <div class="col-xl-3">
+                </div>
+                <!-- Contact Content -->
+                <div class="col-xl-6">
+                    <div class="contact_content">
+                        <div class="contact_form_container">
+                            {{ form_start(registrationForm, {'attr' : {'class': 'contact_form'}}) }}
+{#                            <form action="#" id="contact_form" class="contact_form">#}
+                                <div>
+                                    <div class="row">
+                                        <div class="col-lg-6 contact_name_col">
+                                            {{ form_row(registrationForm.name, {'attr' : {'class': 'contact_input'}}) }}
+{#                                            <input type="text" class="contact_input" required="required">#}
+                                        </div>
+                                        <div class="col-lg-6">
+                                            {{ form_row(registrationForm.email, {'attr' : {'class': 'contact_input'}}) }}
+{#                                            <input type="email" class="contact_input" required="required">#}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 contact_name_col">
+                                        {{ form_row(registrationForm.passwordDigest, {
+                                            label: 'Password',
+                                            'attr': {'class': 'contact_input'}
+                                        }) }}
+{#                                        <input type="password" class="contact_input" required="required">#}
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn contact_button">Register</button>
+                            {{ form_end(registrationForm) }}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3">
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+
+
+
+{#    {{ form_end(registrationForm) }}#}
+    {% block js %}
+        <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+        <script src="{{ asset('styles/bootstrap4/popper.js') }}"></script>
+        <script src="{{ asset('styles/bootstrap4/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('plugins/easing/easing.js') }}"></script>
+        <script src="{{ asset('plugins/parallax-js-master/parallax.min.js') }}"></script>
+        <script src="{{ asset('js/courses.js') }}"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCIwF204lFZg1y4kPSIhKaHEXMLYxxuMhA"></script>
+        <script src="{{ asset('js/contact.js') }}"></script>
+    {% endblock %}
 {% endblock %}

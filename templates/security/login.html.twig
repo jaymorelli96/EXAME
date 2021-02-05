@@ -1,9 +1,50 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}LOGIN{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('styles/bootstrap4/bootstrap.min.css') }}">
+    <link href="{{ asset('plugins/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('plugins/video-js/video-js.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('styles/contact.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('styles/contact_responsive.css') }}">
+{% endblock %}
+{% block nav %}
+    <li><a href="{{ path('elearn') }}">home</a></li>
+    <li ><a href="{{ path('courses') }}">courses</a></li>
+    <li><a href="myCourses.html">My courses</a></li>
+    <li><a href="{{ path('app_register') }}">Register</a></li>
+    <li class="active"><a href="{{ path('app_login') }}">Login</a></li>
+    <li>WELCOME</li>
+{% endblock %}
+
 
 {% block body %}
-<form method="post">
+<!-- Contact -->
+<div class="home">
+    <!-- Background image artist https://unsplash.com/@thepootphotographer -->
+    <div class="home_background parallax_background parallax-window" data-parallax="scroll" data-image-src="{{ asset('images/about.jpg') }}" data-speed="0.8"></div>
+    <div class="home_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="home_content text-center">
+                        <div class="home_title">Log In</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="contact">
+    <div class="container-fluid">
+        <div class="row row-xl-eq-height">
+            <div class="col-xl-3">
+            </div>
+            <!-- Contact Content -->
+            <div class="col-xl-6">
+                <div class="contact_content">
+                    <div class="contact_form_container">
+<form method="post" class="contact_form">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
@@ -14,29 +55,54 @@
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" required>
+
+    <div>
+        <div class="row">
+            <div class="col-lg-6">
+                <label for="inputEmail">Email</label>
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="contact_input" required autofocus>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 contact_name_col">
+            <label for="inputPassword">Password</label>
+            <input type="password" name="password" id="inputPassword" class="contact_input" required>
+        </div>
+    </div>
+
+
+
 
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
 
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
-        </div>
-    #}
-
-    <button class="btn btn-lg btn-primary" type="submit">
+    <button class="contact_button" type="submit">
         Sign in
     </button>
 </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3">
+        </div>
+
+    </div>
+
+</div>
+    </div>
+
+    {% block js %}
+        <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+        <script src="{{ asset('styles/bootstrap4/popper.js') }}"></script>
+        <script src="{{ asset('styles/bootstrap4/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('plugins/easing/easing.js') }}"></script>
+        <script src="{{ asset('plugins/parallax-js-master/parallax.min.js') }}"></script>
+        <script src="{{ asset('js/courses.js') }}"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCIwF204lFZg1y4kPSIhKaHEXMLYxxuMhA"></script>
+        <script src="{{ asset('js/contact.js') }}"></script>
+    {% endblock %}
 {% endblock %}
