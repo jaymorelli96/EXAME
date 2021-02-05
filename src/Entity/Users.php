@@ -3,14 +3,18 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\User;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Users
  *
- * @ORM\Table(name="users", uniqueConstraints={@ORM\UniqueConstraint(name="email", columns={"email"})})
- * @ORM\Entity
+ * @ORM\Table(name="users", uniqueConstraints={@ORM\UniqueConstraint(name="index_users_on_email", columns={"email"})})
+ * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
-class Users
+class Users implements UserInterface
 {
     /**
      * @var int
@@ -23,15 +27,14 @@ class Users
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(name="name", type="string", length=255, nullable=true)
+     * @ORM\Column(name="name", type="string", length=255, nullable=true, options={"default"="NULL"})
      */
     private $name;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="email", type="string", length=255, nullable=false)
+     * @ORM\Column(name="email", type="string", length=255, nullable=true, options={"default"="NULL"})
      */
     private $email;
 
@@ -52,14 +55,14 @@ class Users
     /**
      * @var string|null
      *
-     * @ORM\Column(name="password_digest", type="string", length=255, nullable=true)
+     * @ORM\Column(name="password_digest", type="string", length=4096, nullable=true, options={"default"="NULL"})
      */
     private $passwordDigest;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="remember_digest", type="string", length=255, nullable=true)
+     * @ORM\Column(name="remember_digest", type="string", length=4096, nullable=true, options={"default"="NULL"})
      */
     private $rememberDigest;
 
@@ -73,44 +76,42 @@ class Users
     /**
      * @var string|null
      *
-     * @ORM\Column(name="activation_digest", type="string", length=255, nullable=true)
+     * @ORM\Column(name="activation_digest", type="string", length=255, nullable=true, options={"default"="NULL"})
      */
     private $activationDigest;
+
+
+    private $roles = [];
+
+
 
     /**
      * @var bool|null
      *
-     * @ORM\Column(name="activated", type="boolean", nullable=true)
+     * @ORM\Column(name="activated", type="boolean", nullable=true, options={"default"="NULL"})
      */
     private $activated;
 
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="activated_at", type="datetime", nullable=true)
+     * @ORM\Column(name="activated_at", type="datetime", nullable=true, options={"default"="NULL"})
      */
     private $activatedAt;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="reset_digest", type="string", length=255, nullable=true)
+     * @ORM\Column(name="reset_digest", type="string", length=255, nullable=true, options={"default"="NULL"})
      */
     private $resetDigest;
 
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="reset_sent_at", type="datetime", nullable=true)
+     * @ORM\Column(name="reset_sent_at", type="datetime", nullable=true, options={"default"="NULL"})
      */
     private $resetSentAt;
-
-    /**
-     * @var json|null
-     *
-     * @ORM\Column(name="roles", type="json", nullable=true)
-     */
-    private $roles;
 
     public function getId(): ?int
     {
@@ -129,19 +130,26 @@ class Users
         return $this;
     }
 
+    public function setRole(array $roles)
+    {
+        $this->roles = $roles;
+
+        return $roles;
+    }
+
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
     }
@@ -153,7 +161,7 @@ class Users
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?\DateTime
     {
         return $this->updatedAt;
     }
@@ -261,17 +269,28 @@ class Users
         return $this;
     }
 
-    public function getRoles(): ?array
+
+    public function getRoles()
     {
-        return $this->roles;
+        return ['ROLE_USER'];
     }
 
-    public function setRoles(?array $roles): self
+    public function getPassword()
     {
-        $this->roles = $roles;
-
-        return $this;
+        return $this->passwordDigest;
     }
 
+    public function getSalt()
+    {
+        return null;
+    }
 
+    public function getUsername()
+    {
+        return $this->email;
+    }
+
+    public function eraseCredentials()
+    {
+    }
 }

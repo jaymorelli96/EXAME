@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\CoursesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -34,7 +35,21 @@ class ElearnController extends AbstractController
     public function index(): Response
     {
         return $this->render('elearn/home.html.twig', [
-            'controller_name' => 'ElearnController',
+            'controller_name' => 'index',
+        ]);
+    }
+
+    /**
+     * @Route("/courses", name="courses")
+     * @param CoursesRepository $coursesRepository
+     * @return Response
+     */
+    public function view_courses(CoursesRepository $coursesRepository): Response
+    {
+        $courses = $coursesRepository->getCourses();
+        return $this->render('elearn/courses.html.twig', [
+            'controller_name' => 'courses',
+            'courses' => $courses
         ]);
     }
 }

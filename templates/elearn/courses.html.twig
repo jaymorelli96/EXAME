@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}COURSES{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('styles/bootstrap4/bootstrap.min.css') }}">
+    <link href="{{ asset('plugins/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('plugins/video-js/video-js.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('styles/courses.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('styles/courses_responsive.css') }}">
+{% endblock %}
+{% block nav %}
+    <li><a href="{{ path('elearn') }}">home</a></li>
+    <li class="active"><a href="{{ path('courses') }}">courses</a></li>
+    <li><a href="myCourses.html">My courses</a></li>
+    <li><a href="{{ path('app_register') }}">Register</a></li>
+    <li><a href="{{ path('app_login') }}">Login</a></li>
+    <li>WELCOME</li>
+{% endblock %}
+
+{% block body %}
+    <!-- Courses -->
+
+    <div class="courses">
+        <div class="container">
+
+
+
+            <div class="row courses_row">
+
+
+                <div class="col-lg-10 offset-lg-1">
+                    <div class="section_title text-center"><h2>Choose your new course!</h2></div>
+                    <br>
+                </div>
+
+                {% for course in courses %}
+                <!-- Course -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="course">
+                        <div class="course_image"><img src="{{ asset('images/' ~course.cImage) }}" alt=""></div>
+                        <div class="course_body">
+                            <div class="course_header d-flex flex-row align-items-center justify-content-start">
+                                <div class="course_tag"><a href="#">Featured</a></div>
+                                <div class="course_price ml-auto">Price: <span>${{ course.cPrice }}</span></div>
+                            </div>
+                            <div class="course_title"><h3><a href="#">{{ course.cName }}</a></h3></div>
+                            <div class="course_text">{{ course.cDescription }}</div>
+                            <div class="course_footer d-flex align-items-center justify-content-start">
+                                <div class="course_author_image"><img src="{{ asset('images/' ~course.tImage) }}" ></div>
+                                <div class="course_author_name">By <a href="#">{{ course.tName }}</a></div>
+                                <div class="course_sales ml-auto"><span>{{ course.cSales }}</span> Sales</div>
+                            </div>
+                            <br><div class="text-center"><div class="button"><a href="#">Enroll</a></div></div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+
+
+        </div>
+    </div>
+
+{% block js %}
+    <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ asset('styles/bootstrap4/popper.js') }}"></script>
+    <script src="{{ asset('styles/bootstrap4/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('plugins/easing/easing.js') }}"></script>
+    <script src="{{ asset('plugins/parallax-js-master/parallax.min.js') }}"></script>
+    <script src="{{ asset('js/courses.js') }}"></script>
+{% endblock %}
+{% endblock %}
+

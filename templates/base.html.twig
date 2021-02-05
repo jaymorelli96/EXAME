@@ -1,12 +1,110 @@
+
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Elearn project">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+    <div class="super_container">
+    <header class="header">
+
+        <!-- Top Bar -->
+        <div class="top_bar">
+            <div class="top_bar_container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="top_bar_content d-flex flex-row align-items-center justify-content-start">
+                                <ul class="top_bar_contact_list">
+                                    <li><div class="question">Have any questions?</div></li>
+                                    <li>
+                                        <div>(009) 35475 6688933 32</div>
+                                    </li>
+                                    <li>
+                                        <div>info@elaerntemplate.com</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header Content -->
+        <div class="header_container">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                            <div class="logo_container">
+                                <a href="#">
+                                    <div class="logo_content d-flex flex-row align-items-end justify-content-start">
+                                        <div class="logo_img"><img src="images/logo.png" alt=""></div>
+                                        <div class="logo_text">learn</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <nav class="main_nav_contaner ml-auto">
+                                <ul class="main_nav">
+                                    {% block nav %}
+                                    {% endblock %}
+                                </ul>
+                            </nav>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    {% block body %}{% endblock %}
+
+        <footer class="footer">
+            <div class="container">
+                <div
+                        class="row">
+
+                    <!-- About -->
+                    <div class="col-lg-3 footer_col">
+                        <div class="footer_about">
+                            <div class="logo_container">
+                                <a href="#">
+                                    <div class="logo_content d-flex flex-row align-items-end justify-content-start">
+                                        <div class="logo_img"><img src="{{asset('images/logo.png')}}" alt=""></div>
+                                        <div class="logo_text">learn</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="footer_about_text"></div>
+
+                            <div
+                                    class="copyright">
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                Copyright &copy;<script>
+                                    document.write(new Date().getFullYear());
+                                </script>
+                                All rights reserved | This template is made with
+                                <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                by
+                                <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </footer>
+    </div>
+    {% block js %} {% endblock %}
     </body>
 </html>
+

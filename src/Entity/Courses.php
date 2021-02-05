@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Courses
  *
- * @ORM\Table(name="courses", indexes={@ORM\Index(name="cat_id", columns={"cat_id"}), @ORM\Index(name="teacher_id", columns={"teacher_id"})})
- * @ORM\Entity
+ * @ORM\Table(name="courses", indexes={@ORM\Index(name="teacher_id", columns={"teacher_id"}), @ORM\Index(name="class_id", columns={"class_id"})})
+ * @ORM\Entity(repositoryClass="App\Repository\CoursesRepository")
  */
 class Courses
 {
@@ -57,14 +57,14 @@ class Courses
     private $sales;
 
     /**
-     * @var \Categories
+     * @var \Classes
      *
-     * @ORM\ManyToOne(targetEntity="Categories")
+     * @ORM\ManyToOne(targetEntity="Classes")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="cat_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="class_id", referencedColumnName="id")
      * })
      */
-    private $cat;
+    private $class;
 
     /**
      * @var \Teachers
@@ -141,14 +141,14 @@ class Courses
         return $this;
     }
 
-    public function getCat(): ?Categories
+    public function getClass(): ?Classes
     {
-        return $this->cat;
+        return $this->class;
     }
 
-    public function setCat(?Categories $cat): self
+    public function setClass(?Classes $class): self
     {
-        $this->cat = $cat;
+        $this->class = $class;
 
         return $this;
     }
