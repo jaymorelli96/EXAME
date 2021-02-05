@@ -47,19 +47,19 @@
                 <!-- Course -->
                 <div class="col-lg-4 col-md-6 cBox ">
                     <div class="course">
-                        <div class="course_image"><img src="{{ asset('images/' ~course.cImage) }}" alt=""></div>
+                        <div class="course_image"><img src="{{ asset('images/' ~course.image) }}" alt=""></div>
                         <div class="course_body">
                             <div class="course_header d-flex flex-row align-items-center justify-content-start">
-                                <div class="course_tag"><a href="#">Featured</a></div>
-                                <div class="course_price ml-auto">Price: <span>${{ course.cPrice }}</span></div>
+                                <div class="course_tag"><a href="#">{{ course.class.name }}</a></div>
+                                <div class="course_price ml-auto">Price: <span>${{ course.price }}</span></div>
                             </div>
-                            <br><div class="text-center"><div class="button enroll-btn hidden"><a href="{{ path('enroll', {'id': course.cId}) }}">Enroll</a></div></div>
-                            <div class="course_title"><h3><a class="cTitle" href="#">{{ course.cName }}</a></h3></div>
-                            <div class="course_text">{{ course.cDescription }}</div>
+                            <br><div class="text-center"><div class="button enroll-btn hidden"><a href="{{ path('enroll', {'id': course.id}) }}">Enroll</a></div></div>
+                            <div class="course_title"><h3><a class="cTitle" href="#">{{ course.name }}</a></h3></div>
+                            <div class="course_text">{{ course.description }}</div>
                             <div class="course_footer d-flex align-items-center justify-content-start">
-                                <div class="course_author_image"><img src="{{ asset('images/' ~course.tImage) }}" ></div>
-                                <div class="course_author_name">By <a href="#">{{ course.tName }}</a></div>
-                                <div class="course_sales ml-auto"><span>{{ course.cSales }}</span> Sales</div>
+                                <div class="course_author_image"><img src="{{ asset('images/' ~course.teacher.image) }}" ></div>
+                                <div class="course_author_name">By <a href="#">{{ course.teacher.name }}</a></div>
+                                <div class="course_sales ml-auto"><span>{{ course.sales }}</span> Sales</div>
                             </div>
 
                         </div>

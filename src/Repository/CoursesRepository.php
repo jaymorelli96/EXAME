@@ -19,19 +19,6 @@ class CoursesRepository extends ServiceEntityRepository
         parent::__construct($registry, Courses::class);
     }
 
-    public function getCourses(): Array
-    {
-        $em=$this->getEntityManager();
-        $query = $em->createQuery('SELECT c.id as cId, c.name as cName, c.description as cDescription, classes.id,  c.price as cPrice, c.image as cImage, c.sales as cSales, t.id as tId, t.image as tImage, t.name as tName
-                                    FROM app\Entity\Courses c
-                                    JOIN app\Entity\Teachers t
-                                    JOIN app\Entity\Classes classes
-                                    WHERE c.class = classes.id
-                                    AND
-                                    t.id = c.teacher');
-        return  $query->getResult();
-    }
-
     // /**
     //  * @return Courses[] Returns an array of Courses objects
     //  */

@@ -47,7 +47,7 @@ class ElearnController extends AbstractController
      */
     public function view_courses(CoursesRepository $coursesRepository): Response
     {
-        $courses = $coursesRepository->getCourses();
+        $courses = $coursesRepository->findAll();
         return $this->render('elearn/courses.html.twig', [
             'controller_name' => 'courses',
             'courses' => $courses
